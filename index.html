@@ -3,17 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>VirtualSoft - Single Page Website</title>
+    <title>VirtualSoft | Custom Software Development Company</title>
     <style>
       :root {
-        --bg: #f8f2e8;
-        --paper: #fff9f0;
-        --ink: #1f2a2e;
-        --muted: #5d676b;
-        --accent: #0f766e;
-        --accent-2: #f97316;
-        --line: #d7cec0;
-        --shadow: 0 16px 32px rgba(31, 42, 46, 0.12);
+        --bg: #f3f5f8;
+        --surface: #ffffff;
+        --ink: #0e1420;
+        --muted: #526071;
+        --line: #d5dde8;
+        --brand: #1463ff;
+        --brand-2: #08b1a5;
+        --sun: #ffb84c;
+        --night: #101a32;
+        --shadow-soft: 0 14px 40px rgba(16, 26, 50, 0.08);
+        --shadow-strong: 0 24px 50px rgba(20, 99, 255, 0.22);
       }
 
       * {
@@ -24,163 +27,716 @@
       body {
         margin: 0;
         padding: 0;
-        font-family: "Trebuchet MS", "Segoe UI", sans-serif;
-        background:
-          radial-gradient(circle at 12% 8%, rgba(249, 115, 22, 0.2), transparent 35%),
-          radial-gradient(circle at 82% 24%, rgba(15, 118, 110, 0.2), transparent 38%),
-          linear-gradient(180deg, #fffdf8, var(--bg));
+      }
+
+      body {
+        font-family: "DM Sans", "Segoe UI", sans-serif;
+        line-height: 1.5;
         color: var(--ink);
+        background:
+          radial-gradient(circle at 7% 0%, rgba(8, 177, 165, 0.16), transparent 35%),
+          radial-gradient(circle at 94% 10%, rgba(20, 99, 255, 0.15), transparent 35%),
+          linear-gradient(180deg, #fcfdff, var(--bg));
       }
 
-      .page {
-        min-height: 100vh;
-        display: grid;
-        place-items: center;
-        padding: 24px;
+      h1,
+      h2,
+      h3,
+      .brand,
+      .metric strong,
+      .num,
+      .price {
+        font-family: "Syne", "Avenir Next", sans-serif;
       }
 
-      .card {
-        width: min(980px, 100%);
-        background: linear-gradient(180deg, rgba(255, 249, 240, 0.96), rgba(255, 253, 248, 0.95));
-        border: 1px solid var(--line);
-        border-radius: 24px;
-        box-shadow: var(--shadow);
-        overflow: hidden;
-        animation: riseIn 700ms ease-out both;
+      a {
+        color: inherit;
+        text-decoration: none;
       }
 
-      .hero {
-        display: grid;
-        gap: 20px;
-        grid-template-columns: 1.2fr 1fr;
-        padding: 48px;
+      .container {
+        width: min(1180px, 100% - 2.6rem);
+        margin-inline: auto;
       }
 
-      .tag {
-        display: inline-block;
-        padding: 6px 12px;
-        border-radius: 999px;
-        border: 1px solid var(--line);
-        background: rgba(255, 255, 255, 0.8);
-        color: var(--muted);
-        letter-spacing: 0.08em;
-        font-size: 0.75rem;
-        text-transform: uppercase;
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 30;
+        backdrop-filter: blur(10px);
+        background: rgba(252, 253, 255, 0.9);
+        border-bottom: 1px solid rgba(213, 221, 232, 0.8);
       }
 
-      h1 {
-        margin: 14px 0 12px;
-        font-size: clamp(2rem, 5vw, 3.6rem);
-        line-height: 1.05;
-      }
-
-      .subtitle {
-        margin: 0;
-        max-width: 56ch;
-        color: var(--muted);
-        line-height: 1.6;
-      }
-
-      .actions {
-        margin-top: 26px;
+      .nav {
+        min-height: 78px;
         display: flex;
-        gap: 12px;
-        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.68rem;
+        letter-spacing: 0.01em;
+        font-size: 1.08rem;
+        font-weight: 700;
+      }
+
+      .brand-mark {
+        width: 30px;
+        aspect-ratio: 1;
+        border-radius: 10px;
+        background: conic-gradient(from 215deg, var(--brand), var(--brand-2), var(--sun), var(--brand));
+        box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.4);
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 1.3rem;
+        color: var(--muted);
+        font-size: 0.94rem;
+        font-weight: 600;
+      }
+
+      .nav-links a {
+        transition: color 160ms ease;
+      }
+
+      .nav-links a:hover {
+        color: var(--brand);
+      }
+
+      .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 0.7rem;
       }
 
       .btn {
         border: 0;
-        border-radius: 10px;
-        padding: 12px 18px;
-        font-size: 0.95rem;
+        border-radius: 13px;
+        padding: 0.74rem 1.2rem;
+        font: inherit;
         font-weight: 700;
         cursor: pointer;
-        transition: transform 0.2s ease, opacity 0.2s ease;
+        transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
       }
 
-      .btn:hover {
-        transform: translateY(-1px);
+      .btn:focus-visible {
+        outline: 3px solid rgba(20, 99, 255, 0.35);
+        outline-offset: 2px;
       }
 
-      .btn-primary {
-        background: var(--accent);
-        color: #f6fffd;
-      }
-
-      .btn-secondary {
-        background: transparent;
+      .btn-ghost {
+        background: #ffffff;
         border: 1px solid var(--line);
         color: var(--ink);
       }
 
-      .visual {
-        align-self: center;
-        background: repeating-linear-gradient(
-          -30deg,
-          #fff,
-          #fff 14px,
-          rgba(249, 115, 22, 0.12) 14px,
-          rgba(249, 115, 22, 0.12) 28px
-        );
-        border: 1px solid var(--line);
-        border-radius: 16px;
-        padding: 18px;
-        min-height: 240px;
-        display: grid;
-        align-content: center;
+      .btn-ghost:hover {
+        transform: translateY(-1px);
       }
 
-      .stat {
+      .btn-primary {
+        color: #f8fbff;
+        background: linear-gradient(130deg, var(--brand), #0e8dfd);
+        box-shadow: 0 10px 22px rgba(20, 99, 255, 0.22);
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 14px 24px rgba(20, 99, 255, 0.28);
+      }
+
+      .mobile-menu-toggle {
+        display: none;
+      }
+
+      .hero {
+        position: relative;
+        overflow: hidden;
+        padding: clamp(2.7rem, 6vw, 5rem) 0 3rem;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        width: min(56vw, 700px);
+        aspect-ratio: 1;
+        border-radius: 50%;
+        right: -14%;
+        top: -32%;
+        background: radial-gradient(circle at center, rgba(20, 99, 255, 0.23), transparent 68%);
+        z-index: -1;
+      }
+
+      .hero-grid {
         display: grid;
-        grid-template-columns: auto 1fr;
-        gap: 10px 14px;
+        grid-template-columns: 1.03fr 0.97fr;
+        gap: 1.4rem;
         align-items: center;
       }
 
-      .dot {
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        background: var(--accent-2);
-        box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.2);
-      }
-
-      .count {
-        font-size: clamp(2.1rem, 7vw, 3.4rem);
-        font-weight: 800;
-        line-height: 1;
-      }
-
-      .note {
-        margin-top: 8px;
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.48rem;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.88);
+        border-radius: 999px;
+        padding: 0.34rem 0.72rem;
         color: var(--muted);
-        font-size: 0.95rem;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+        font-size: 0.76rem;
       }
 
-      .footer {
-        border-top: 1px solid var(--line);
-        padding: 18px 48px;
+      .signal {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--brand-2);
+        box-shadow: 0 0 0 0 rgba(8, 177, 165, 0.7);
+        animation: pulse 1.7s infinite;
+      }
+
+      h1 {
+        margin: 1rem 0 0.9rem;
+        font-size: clamp(2.15rem, 6vw, 4.6rem);
+        line-height: 0.96;
+        letter-spacing: -0.02em;
+        max-width: 12ch;
+      }
+
+      .hero p {
+        margin: 0;
+        max-width: 58ch;
+        color: var(--muted);
+        font-size: clamp(1rem, 2vw, 1.13rem);
+      }
+
+      .hero-actions {
+        margin-top: 1.6rem;
+        display: flex;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+      }
+
+      .proof {
+        margin-top: 1.2rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.7rem 1.2rem;
+        color: var(--muted);
+        font-size: 0.88rem;
+      }
+
+      .proof strong {
+        color: var(--ink);
+      }
+
+      .hero-panel {
+        background: linear-gradient(160deg, #ffffff, #f2f7ff 58%, #edf9f7);
+        border-radius: 22px;
+        border: 1px solid var(--line);
+        box-shadow: var(--shadow-strong);
+        padding: 1.05rem;
+      }
+
+      .panel-head {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        gap: 10px;
+        padding: 0.2rem 0.35rem 0.9rem;
+      }
+
+      .panel-head span {
+        font-size: 0.92rem;
+        font-weight: 700;
+      }
+
+      .chip {
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 0.2rem 0.58rem;
+        color: var(--muted);
+        font-size: 0.74rem;
+        background: #fff;
+      }
+
+      .metrics {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.66rem;
+      }
+
+      .metric {
+        background: rgba(255, 255, 255, 0.88);
+        border: 1px solid #d7e2ef;
+        border-radius: 13px;
+        padding: 0.72rem;
+      }
+
+      .metric strong {
+        display: block;
+        font-size: 1.2rem;
+      }
+
+      .metric span {
+        color: var(--muted);
+        font-size: 0.83rem;
+      }
+
+      .pipeline {
+        margin-top: 0.75rem;
+        border: 1px solid #d7e2ef;
+        border-radius: 13px;
+        background: #fff;
+        padding: 0.64rem;
+      }
+
+      .phase {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.6rem;
+        padding: 0.42rem 0;
+        border-bottom: 1px dashed #deebf5;
+        font-size: 0.85rem;
+      }
+
+      .phase:last-child {
+        border-bottom: 0;
+      }
+
+      .status {
+        padding: 0.18rem 0.55rem;
+        border-radius: 999px;
+        font-size: 0.74rem;
+        font-weight: 700;
+      }
+
+      .status.green {
+        background: rgba(8, 177, 165, 0.14);
+        color: #0f6f68;
+      }
+
+      .status.blue {
+        background: rgba(20, 99, 255, 0.14);
+        color: #0a52d7;
+      }
+
+      .status.sun {
+        background: rgba(255, 184, 76, 0.2);
+        color: #8c6318;
+      }
+
+      .logos {
+        border-block: 1px solid var(--line);
+        background: #fbfcff;
+      }
+
+      .logo-row {
+        min-height: 94px;
+        display: grid;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        gap: 0.65rem;
+        align-items: center;
+      }
+
+      .logo {
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: #fff;
+        color: #677586;
+        text-align: center;
+        font-size: 0.84rem;
+        font-weight: 700;
+        padding: 0.52rem;
+      }
+
+      .section {
+        padding: 4rem 0;
+      }
+
+      .section h2 {
+        margin: 0;
+        font-size: clamp(1.55rem, 3.5vw, 2.55rem);
+        letter-spacing: -0.02em;
+      }
+
+      .intro {
+        margin: 0.85rem 0 0;
+        color: var(--muted);
+        max-width: 64ch;
+      }
+
+      .services {
+        margin-top: 1.9rem;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1rem;
+      }
+
+      .card {
+        border: 1px solid var(--line);
+        border-radius: 17px;
+        background: linear-gradient(180deg, #ffffff, #f9fcff);
+        box-shadow: var(--shadow-soft);
+        padding: 1rem;
+        opacity: 0;
+        transform: translateY(14px);
+      }
+
+      .card.reveal {
+        animation: riseIn 620ms ease forwards;
+      }
+
+      .icon {
+        width: 2.2rem;
+        aspect-ratio: 1;
+        border-radius: 10px;
+        display: grid;
+        place-items: center;
+        color: #f8fbff;
+        font-weight: 800;
+      }
+
+      .icon.a {
+        background: linear-gradient(135deg, #1463ff, #0f88ff);
+      }
+
+      .icon.b {
+        background: linear-gradient(135deg, #08b1a5, #2ad0be);
+      }
+
+      .icon.c {
+        background: linear-gradient(135deg, #ffab3f, #ffd06d);
+        color: #67460a;
+      }
+
+      .card h3 {
+        margin: 0.6rem 0 0.5rem;
+        font-size: 1.06rem;
+      }
+
+      .card p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.93rem;
+      }
+
+      .grid-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+      }
+
+      .case-card {
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: #fff;
+        box-shadow: var(--shadow-soft);
+        overflow: hidden;
+      }
+
+      .case-top {
+        padding: 1.1rem;
+        border-bottom: 1px solid var(--line);
+        background:
+          radial-gradient(circle at 90% 0%, rgba(20, 99, 255, 0.16), transparent 40%),
+          #f9fbff;
+      }
+
+      .case-top h3 {
+        margin: 0;
+        font-size: 1.14rem;
+      }
+
+      .case-top p {
+        margin: 0.5rem 0 0;
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      .case-metrics {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.55rem;
+        padding: 1rem;
+      }
+
+      .num {
+        border: 1px solid var(--line);
+        border-radius: 11px;
+        padding: 0.56rem;
+        background: #fff;
+      }
+
+      .num strong {
+        display: block;
+        font-size: 1.14rem;
+      }
+
+      .num span {
+        color: var(--muted);
+        font-size: 0.77rem;
+      }
+
+      .stack {
+        margin-top: 1.8rem;
+        display: grid;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        gap: 0.65rem;
+      }
+
+      .pill {
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: #fff;
+        text-align: center;
+        font-weight: 700;
+        color: #5d6b7b;
+        padding: 0.42rem;
+        font-size: 0.8rem;
+      }
+
+      .process {
+        margin-top: 1.8rem;
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 0.85rem;
+      }
+
+      .step {
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: #fff;
+        padding: 1rem;
+      }
+
+      .step span {
+        display: inline-grid;
+        place-items: center;
+        width: 1.95rem;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        background: rgba(20, 99, 255, 0.12);
+        color: var(--brand);
+        font-weight: 800;
+      }
+
+      .step h3 {
+        margin: 0.7rem 0 0.42rem;
+        font-size: 1.01rem;
+      }
+
+      .step p {
+        margin: 0;
         color: var(--muted);
         font-size: 0.9rem;
       }
 
-      .spark {
+      .split {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        align-items: stretch;
+      }
+
+      .testimonial {
+        border-radius: 20px;
+        background: linear-gradient(150deg, #1143aa, #101a32);
+        color: #f4f8ff;
+        padding: clamp(1.2rem, 4vw, 2rem);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .testimonial::after {
+        content: "";
+        position: absolute;
+        width: 56%;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        right: -23%;
+        top: -20%;
+        background: radial-gradient(circle at center, rgba(255, 255, 255, 0.22), transparent 72%);
+      }
+
+      .quote {
+        margin: 0;
+        font-size: clamp(1.05rem, 2.4vw, 1.45rem);
+        line-height: 1.35;
+        max-width: 36ch;
+      }
+
+      .person {
+        margin: 1.2rem 0 0;
+        color: rgba(244, 248, 255, 0.84);
+        font-size: 0.9rem;
+      }
+
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.8rem;
+      }
+
+      .stat {
+        border: 1px solid var(--line);
+        border-radius: 15px;
+        background: #fff;
+        padding: 1rem;
+      }
+
+      .stat strong {
+        font-size: 1.42rem;
+      }
+
+      .stat span {
+        display: block;
+        color: var(--muted);
+        font-size: 0.84rem;
+      }
+
+      .pricing {
+        margin-top: 1.8rem;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1rem;
+      }
+
+      .price-card {
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: #fff;
+        box-shadow: var(--shadow-soft);
+        padding: 1.1rem;
+      }
+
+      .price-card.featured {
+        border-color: #b5cdf8;
+        background: linear-gradient(180deg, #ffffff, #f2f7ff);
+        transform: translateY(-5px);
+      }
+
+      .tier {
         display: inline-block;
-        width: 10px;
-        height: 10px;
-        border-radius: 2px;
-        background: var(--accent);
-        transform: rotate(14deg);
+        border: 1px solid var(--line);
+        color: var(--muted);
+        border-radius: 999px;
+        padding: 0.22rem 0.55rem;
+        font-size: 0.73rem;
+      }
+
+      .price {
+        margin: 0.7rem 0;
+        font-size: 2rem;
+        line-height: 1;
+      }
+
+      .price small {
+        color: var(--muted);
+        font-size: 0.94rem;
+      }
+
+      .check {
+        list-style: none;
+        margin: 0.75rem 0 1rem;
+        padding: 0;
+      }
+
+      .check li {
+        margin: 0.45rem 0;
+        color: #344253;
+        font-size: 0.9rem;
+      }
+
+      .faq {
+        margin-top: 2rem;
+      }
+
+      details {
+        margin-bottom: 0.7rem;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: #fff;
+        padding: 0.8rem 0.95rem;
+      }
+
+      summary {
+        cursor: pointer;
+        font-weight: 700;
+      }
+
+      details p {
+        margin: 0.65rem 0 0;
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      .cta {
+        padding: 3.1rem 0 4.2rem;
+      }
+
+      .cta-panel {
+        border: 1px solid #c9daf5;
+        border-radius: 24px;
+        background:
+          radial-gradient(circle at 8% 18%, rgba(8, 177, 165, 0.24), transparent 42%),
+          radial-gradient(circle at 92% 78%, rgba(255, 184, 76, 0.2), transparent 35%),
+          linear-gradient(160deg, #f6f9ff, #edf5ff 45%, #eaf9f6);
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+        gap: 1rem;
+        padding: clamp(1.2rem, 4vw, 2.4rem);
+      }
+
+      .cta-panel h2 {
+        margin: 0;
+      }
+
+      .cta-panel p {
+        margin: 0.65rem 0 0;
+        color: var(--muted);
+      }
+
+      footer {
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        font-size: 0.86rem;
+        padding: 1.1rem 0 2.3rem;
+      }
+
+      .footer-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+
+      @keyframes pulse {
+        0% {
+          box-shadow: 0 0 0 0 rgba(8, 177, 165, 0.6);
+        }
+        80% {
+          box-shadow: 0 0 0 10px rgba(8, 177, 165, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(8, 177, 165, 0);
+        }
       }
 
       @keyframes riseIn {
         from {
           opacity: 0;
-          transform: translateY(16px);
+          transform: translateY(14px);
         }
         to {
           opacity: 1;
@@ -188,67 +744,419 @@
         }
       }
 
-      @media (max-width: 800px) {
-        .hero {
-          grid-template-columns: 1fr;
-          padding: 30px;
+      @media (max-width: 1040px) {
+        .hero-grid,
+        .services,
+        .grid-2,
+        .split,
+        .pricing,
+        .process,
+        .logo-row {
+          grid-template-columns: 1fr 1fr;
         }
 
-        .footer {
-          padding: 14px 30px;
-          flex-direction: column;
-          align-items: flex-start;
+        .stack {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .cta-panel {
+          grid-template-columns: 1fr;
+        }
+
+        .nav-links {
+          display: none;
+        }
+
+        .mobile-menu-toggle {
+          display: inline-flex;
+        }
+      }
+
+      @media (max-width: 760px) {
+        .container {
+          width: min(1180px, 100% - 1.3rem);
+        }
+
+        .hero-grid,
+        .services,
+        .grid-2,
+        .split,
+        .pricing,
+        .process,
+        .logo-row,
+        .stack,
+        .metrics,
+        .stats,
+        .case-metrics {
+          grid-template-columns: 1fr;
+        }
+
+        h1 {
+          max-width: 100%;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation: none !important;
+          transition: none !important;
+          scroll-behavior: auto !important;
         }
       }
     </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Syne:wght@500;700;800&display=swap" rel="stylesheet" />
   </head>
   <body>
-    <main class="page">
-      <section class="card">
-        <div class="hero">
+    <header class="site-header">
+      <div class="container nav">
+        <a class="brand" href="#top" aria-label="VirtualSoft Home">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span>VirtualSoft</span>
+        </a>
+
+        <nav class="nav-links" aria-label="Main navigation">
+          <a href="#services">Services</a>
+          <a href="#work">Case Studies</a>
+          <a href="#process">Process</a>
+          <a href="#pricing">Engagement</a>
+          <a href="#faq">FAQ</a>
+        </nav>
+
+        <div class="nav-actions">
+          <button class="btn btn-ghost mobile-menu-toggle" id="menuBtn" aria-expanded="false" aria-controls="mobileNav" type="button">Menu</button>
+          <button class="btn btn-ghost" type="button">Careers</button>
+          <button class="btn btn-primary" type="button">Start a Project</button>
+        </div>
+      </div>
+      <div class="container" id="mobileNav" hidden>
+        <nav style="display:flex;gap:1rem;padding:0 0 1rem;color:var(--muted);font-size:0.93rem;">
+          <a href="#services">Services</a>
+          <a href="#work">Case Studies</a>
+          <a href="#process">Process</a>
+          <a href="#pricing">Engagement</a>
+          <a href="#faq">FAQ</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="container hero-grid">
           <div>
-            <span class="tag">VirtualSoft</span>
-            <h1>One page. Clear story. Strong first impression.</h1>
-            <p class="subtitle">
-              This single-file website is ready to publish. It includes responsive design,
-              custom styling, and a tiny interactive counter so your page feels alive from the first load.
+            <span class="eyebrow"><span class="signal" aria-hidden="true"></span> Boutique team, enterprise delivery</span>
+            <h1>Build digital products that scale with your business.</h1>
+            <p>
+              VirtualSoft is a software development company helping startups and enterprises design, build,
+              and modernize products across web, mobile, cloud, and AI. We combine strategic thinking, strong engineering,
+              and transparent delivery.
             </p>
-            <div class="actions">
-              <button class="btn btn-primary" id="boostBtn">Boost Counter</button>
-              <button class="btn btn-secondary" onclick="window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })">
-                Jump to Footer
-              </button>
+
+            <div class="hero-actions">
+              <button class="btn btn-primary" type="button">Book Discovery Call</button>
+              <button class="btn btn-ghost" type="button">View Portfolio</button>
+            </div>
+
+            <div class="proof">
+              <span><strong>120+</strong> successful product launches</span>
+              <span><strong>35%</strong> faster time-to-market</span>
+              <span><strong>98%</strong> project satisfaction score</span>
             </div>
           </div>
 
-          <aside class="visual">
-            <div class="stat">
-              <span class="dot" aria-hidden="true"></span>
-              <div>
-                <div class="count" id="counter">128</div>
-                <div class="note">Visitors engaged today</div>
+          <aside class="hero-panel" aria-label="Delivery snapshot">
+            <div class="panel-head">
+              <span>Delivery Portfolio Pulse</span>
+              <span class="chip">Q2 2026</span>
+            </div>
+            <div class="metrics">
+              <div class="metric">
+                <strong>18</strong>
+                <span>Active engagements</span>
               </div>
+              <div class="metric">
+                <strong>42</strong>
+                <span>Engineers and designers</span>
+              </div>
+              <div class="metric">
+                <strong>4.9/5</strong>
+                <span>Average client rating</span>
+              </div>
+              <div class="metric">
+                <strong id="momentum">+31%</strong>
+                <span>Quarterly growth</span>
+              </div>
+            </div>
+            <div class="pipeline">
+              <div class="phase"><span>FinTech platform modernization</span><span class="status blue">In Sprint</span></div>
+              <div class="phase"><span>Healthcare portal launch</span><span class="status green">Released</span></div>
+              <div class="phase"><span>Retail AI recommendation engine</span><span class="status sun">QA Review</span></div>
             </div>
           </aside>
         </div>
+      </section>
 
-        <div class="footer">
-          <span><span class="spark" aria-hidden="true"></span> Built as a single HTML file</span>
-          <span id="today"></span>
+      <section class="logos">
+        <div class="container logo-row" aria-label="Trusted by">
+          <div class="logo">Northlane</div>
+          <div class="logo">Canopy Health</div>
+          <div class="logo">Arbor Logistics</div>
+          <div class="logo">BrightPay</div>
+          <div class="logo">Nova Retail</div>
+          <div class="logo">Crestline Energy</div>
+        </div>
+      </section>
+
+      <section class="section" id="services">
+        <div class="container">
+          <h2>End-to-end software development services</h2>
+          <p class="intro">
+            From product strategy to post-launch optimization, we deliver Microsoft and cloud-native solutions that move your business forward.
+          </p>
+
+          <div class="services">
+            <article class="card">
+              <div class="icon a" aria-hidden="true">P</div>
+              <h3>Product Discovery</h3>
+              <p>Clarify goals, user journeys, architecture, and roadmap priorities before engineering starts.</p>
+            </article>
+            <article class="card">
+              <div class="icon b" aria-hidden="true">W</div>
+              <h3>.NET App Development</h3>
+              <p>Build secure, scalable .NET applications and APIs with modern architecture, clean code, and reliable performance.</p>
+            </article>
+            <article class="card">
+              <div class="icon c" aria-hidden="true">M</div>
+              <h3>Mobile App Development</h3>
+              <p>Deliver native and cross-platform apps with smooth UX and measurable business outcomes.</p>
+            </article>
+            <article class="card">
+              <div class="icon b" aria-hidden="true">C</div>
+              <h3>Cloud & DevOps</h3>
+              <p>Modernize infrastructure, automate deployments, and reduce release risk with robust CI/CD.</p>
+            </article>
+            <article class="card">
+              <div class="icon c" aria-hidden="true">A</div>
+              <h3>AI & Copilot in Power Platform</h3>
+              <p>Leverage AI and Copilot to automate workflows and build intelligent Power Apps, Power Automate flows, and copilots.</p>
+            </article>
+            <article class="card">
+              <div class="icon a" aria-hidden="true">S</div>
+              <h3>SharePoint Solutions</h3>
+              <p>Design SharePoint intranets, document workflows, and custom integrations that improve collaboration and governance.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="work" style="padding-top:0;">
+        <div class="container">
+          <h2>Selected case studies</h2>
+          <p class="intro">Real outcomes from real clients across regulated, high-growth, and enterprise environments.</p>
+
+          <div class="grid-2" style="margin-top:1.9rem;">
+            <article class="case-card">
+              <div class="case-top">
+                <h3>FinTech onboarding transformation</h3>
+                <p>Rebuilt a legacy onboarding flow into a secure digital-first platform with stronger conversion.</p>
+              </div>
+              <div class="case-metrics">
+                <div class="num"><strong>53%</strong><span>Faster onboarding</span></div>
+                <div class="num"><strong>2.1x</strong><span>Lead conversion</span></div>
+                <div class="num"><strong>99.96%</strong><span>Platform uptime</span></div>
+              </div>
+            </article>
+
+            <article class="case-card">
+              <div class="case-top">
+                <h3>Healthcare operations portal</h3>
+                <p>Built a role-based portal unifying operations, reporting, and compliance across multiple clinics.</p>
+              </div>
+              <div class="case-metrics">
+                <div class="num"><strong>41%</strong><span>Reduced admin hours</span></div>
+                <div class="num"><strong>7</strong><span>Systems integrated</span></div>
+                <div class="num"><strong>6 mo</strong><span>Delivery timeline</span></div>
+              </div>
+            </article>
+          </div>
+
+          <div class="stack" aria-label="Technology stack">
+            <div class="pill">React</div>
+            <div class="pill">Node.js</div>
+            <div class="pill">.NET</div>
+            <div class="pill">SharePoint</div>
+            <div class="pill">Power Platform</div>
+            <div class="pill">Copilot Studio</div>
+            <div class="pill">Python</div>
+            <div class="pill">AWS</div>
+            <div class="pill">Azure</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="process">
+        <div class="container">
+          <h2>Clear process. Predictable delivery.</h2>
+          <p class="intro">We prioritize transparency, speed, and quality from discovery to long-term growth.</p>
+
+          <div class="process">
+            <article class="step">
+              <span>1</span>
+              <h3>Discover</h3>
+              <p>Define business goals, technical constraints, and success metrics.</p>
+            </article>
+            <article class="step">
+              <span>2</span>
+              <h3>Design</h3>
+              <p>Create UX and system architecture aligned with scale and performance.</p>
+            </article>
+            <article class="step">
+              <span>3</span>
+              <h3>Develop</h3>
+              <p>Ship in agile sprints with regular demos and iterative improvements.</p>
+            </article>
+            <article class="step">
+              <span>4</span>
+              <h3>Optimize</h3>
+              <p>Monitor outcomes, release enhancements, and support your growth roadmap.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" style="padding-top:0;">
+        <div class="container split">
+          <article class="testimonial">
+            <p class="quote">"VirtualSoft became an extension of our team. They improved our product velocity and code quality while keeping leadership aligned every sprint."</p>
+            <p class="person">Maya Rhodes, VP Product at Northlane</p>
+          </article>
+
+          <div class="stats">
+            <div class="stat"><strong>87%</strong><span>Clients engage beyond first project</span></div>
+            <div class="stat"><strong>3.8 yrs</strong><span>Average client partnership length</span></div>
+            <div class="stat"><strong>24 hrs</strong><span>Average response time for support</span></div>
+            <div class="stat"><strong>100%</strong><span>Transparent sprint reporting</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="pricing">
+        <div class="container">
+          <h2>Flexible engagement models</h2>
+          <p class="intro">Choose the collaboration structure that best fits your product stage and internal capacity.</p>
+
+          <div class="pricing">
+            <article class="price-card">
+              <span class="tier">Team Extension</span>
+              <h3>Dedicated Squad</h3>
+              <p class="price">From $14k <small>/month</small></p>
+              <ul class="check">
+                <li>Cross-functional pod</li>
+                <li>Sprint planning and delivery</li>
+                <li>Weekly leadership sync</li>
+              </ul>
+              <button class="btn btn-ghost" type="button">Get Proposal</button>
+            </article>
+
+            <article class="price-card featured">
+              <span class="tier">Most Requested</span>
+              <h3>Build-Operate-Transfer</h3>
+              <p class="price">Custom</p>
+              <ul class="check">
+                <li>End-to-end product build</li>
+                <li>Architecture + DevOps + QA</li>
+                <li>Knowledge transfer to your team</li>
+              </ul>
+              <button class="btn btn-primary" type="button">Book Consultation</button>
+            </article>
+
+            <article class="price-card">
+              <span class="tier">Modernization</span>
+              <h3>Legacy to Cloud</h3>
+              <p class="price">Scoped</p>
+              <ul class="check">
+                <li>Technical audit and roadmap</li>
+                <li>Incremental modernization</li>
+                <li>Risk-controlled rollout</li>
+              </ul>
+              <button class="btn btn-ghost" type="button">Start Assessment</button>
+            </article>
+          </div>
+
+          <div class="faq" id="faq">
+            <h2>Frequently asked questions</h2>
+            <details>
+              <summary>What project sizes do you typically handle?</summary>
+              <p>We support MVPs, platform rebuilds, and enterprise modernization programs ranging from small squads to multi-team delivery.</p>
+            </details>
+            <details>
+              <summary>Can you collaborate with our internal team?</summary>
+              <p>Yes. We frequently integrate with in-house product and engineering teams and adapt to your tools and sprint rhythm.</p>
+            </details>
+            <details>
+              <summary>Do you provide post-launch support?</summary>
+              <p>Yes. We offer maintenance, performance tuning, feature enhancements, and long-term reliability monitoring.</p>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <section class="cta">
+        <div class="container">
+          <div class="cta-panel">
+            <div>
+              <h2>Have a product idea or modernization challenge?</h2>
+              <p>Share your goals and get a practical roadmap from strategy through delivery.</p>
+            </div>
+            <div style="display:flex;gap:0.7rem;flex-wrap:wrap;">
+              <button class="btn btn-primary" type="button">Schedule Strategy Call</button>
+              <button class="btn btn-ghost" type="button">Download Capabilities Deck</button>
+            </div>
+          </div>
         </div>
       </section>
     </main>
 
-    <script>
-      const counterEl = document.getElementById("counter");
-      const boostBtn = document.getElementById("boostBtn");
-      const todayEl = document.getElementById("today");
-      let count = Number(counterEl.textContent);
+    <footer>
+      <div class="container footer-row">
+        <span>VirtualSoft Software Development Company</span>
+        <span id="today"></span>
+      </div>
+    </footer>
 
-      boostBtn.addEventListener("click", () => {
-        count += Math.floor(Math.random() * 7) + 1;
-        counterEl.textContent = String(count);
+    <script>
+      const cards = document.querySelectorAll(".card");
+      const menuBtn = document.getElementById("menuBtn");
+      const mobileNav = document.getElementById("mobileNav");
+      const momentum = document.getElementById("momentum");
+      const todayEl = document.getElementById("today");
+
+      const observer = new IntersectionObserver(
+        entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("reveal");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.2 }
+      );
+
+      cards.forEach(card => observer.observe(card));
+
+      menuBtn.addEventListener("click", () => {
+        const expanded = menuBtn.getAttribute("aria-expanded") === "true";
+        menuBtn.setAttribute("aria-expanded", String(!expanded));
+        mobileNav.hidden = expanded;
       });
+
+      let growth = 31;
+      setInterval(() => {
+        growth = growth >= 36 ? 31 : growth + 1;
+        momentum.textContent = `+${growth}%`;
+      }, 1700);
 
       todayEl.textContent = new Date().toLocaleDateString(undefined, {
         weekday: "long",
