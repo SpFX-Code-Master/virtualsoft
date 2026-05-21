@@ -102,6 +102,55 @@
         font-weight: 600;
       }
 
+      .nav-item {
+        position: relative;
+      }
+
+      .nav-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+      }
+
+      .caret {
+        font-size: 0.7rem;
+        transform: translateY(1px);
+      }
+
+      .nav-submenu {
+        position: absolute;
+        top: calc(100% + 0.55rem);
+        left: 0;
+        min-width: 240px;
+        display: none;
+        flex-direction: column;
+        gap: 0.2rem;
+        padding: 0.45rem;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: #fff;
+        box-shadow: var(--shadow-soft);
+      }
+
+      .nav-item:hover .nav-submenu,
+      .nav-item:focus-within .nav-submenu {
+        display: flex;
+      }
+
+      .nav-submenu a {
+        padding: 0.5rem 0.62rem;
+        border-radius: 8px;
+        font-size: 0.86rem;
+        font-weight: 600;
+        color: #445365;
+      }
+
+      .nav-submenu a:hover,
+      .nav-submenu a:focus-visible {
+        background: #f3f7ff;
+        color: var(--brand);
+      }
+
       .nav-links a {
         transition: color 160ms ease;
       }
@@ -154,6 +203,38 @@
 
       .mobile-menu-toggle {
         display: none;
+      }
+
+      .mobile-nav {
+        display: flex;
+        gap: 1rem;
+        padding: 0 0 1rem;
+        color: var(--muted);
+        font-size: 0.93rem;
+        flex-wrap: wrap;
+      }
+
+      .mobile-submenu {
+        width: 100%;
+      }
+
+      .mobile-submenu summary {
+        list-style: none;
+      }
+
+      .mobile-submenu summary::-webkit-details-marker {
+        display: none;
+      }
+
+      .mobile-submenu-links {
+        margin-top: 0.5rem;
+        display: grid;
+        gap: 0.42rem;
+      }
+
+      .mobile-submenu-links a {
+        font-size: 0.88rem;
+        color: #445365;
       }
 
       .hero {
@@ -367,6 +448,79 @@
         margin: 0;
         font-size: clamp(1.55rem, 3.5vw, 2.55rem);
         letter-spacing: -0.02em;
+      }
+
+      .about-wrap {
+        margin-top: 1.7rem;
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 1rem;
+      }
+
+      .about-story {
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: linear-gradient(180deg, #ffffff, #f8fbff);
+        box-shadow: var(--shadow-soft);
+        padding: 1.2rem;
+      }
+
+      .about-story p {
+        margin: 0.65rem 0 0;
+        color: var(--muted);
+      }
+
+      .about-highlights {
+        margin-top: 1rem;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.65rem;
+      }
+
+      .about-chip {
+        border: 1px solid #d8e5f5;
+        border-radius: 12px;
+        background: #fff;
+        padding: 0.62rem;
+      }
+
+      .about-chip strong {
+        display: block;
+        font-size: 1rem;
+      }
+
+      .about-chip span {
+        color: var(--muted);
+        font-size: 0.82rem;
+      }
+
+      .about-values {
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: #fff;
+        box-shadow: var(--shadow-soft);
+        padding: 1rem;
+      }
+
+      .about-values h3 {
+        margin: 0;
+      }
+
+      .value-list {
+        margin: 0.85rem 0 0;
+        padding: 0;
+        list-style: none;
+        display: grid;
+        gap: 0.56rem;
+      }
+
+      .value-list li {
+        border: 1px solid #dce7f4;
+        border-radius: 10px;
+        padding: 0.56rem 0.62rem;
+        color: #3b4a5c;
+        background: #fdfefe;
+        font-size: 0.9rem;
       }
 
       .intro {
@@ -721,6 +875,17 @@
         flex-wrap: wrap;
       }
 
+      .cta-address {
+        color: var(--muted);
+        margin-top: 0.7rem;
+      }
+
+      .cta-address a {
+        color: var(--brand);
+        text-decoration: underline;
+        text-underline-offset: 2px;
+      }
+
       @keyframes pulse {
         0% {
           box-shadow: 0 0 0 0 rgba(8, 177, 165, 0.6);
@@ -746,6 +911,7 @@
 
       @media (max-width: 1040px) {
         .hero-grid,
+        .about-wrap,
         .services,
         .grid-2,
         .split,
@@ -778,6 +944,7 @@
         }
 
         .hero-grid,
+        .about-wrap,
         .services,
         .grid-2,
         .split,
@@ -787,7 +954,8 @@
         .stack,
         .metrics,
         .stats,
-        .case-metrics {
+        .case-metrics,
+        .about-highlights {
           grid-template-columns: 1fr;
         }
 
@@ -817,10 +985,24 @@
         </a>
 
         <nav class="nav-links" aria-label="Main navigation">
-          <a href="#services">Services</a>
+          <div class="nav-item">
+            <a class="nav-link" href="#services" aria-haspopup="true">
+              Services <span class="caret" aria-hidden="true">▾</span>
+            </a>
+            <div class="nav-submenu" aria-label="Services submenu">
+              <a href="#service-discovery">Product Discovery</a>
+              <a href="#service-dotnet">.NET App Development</a>
+              <a href="#service-mobile">Mobile App Development</a>
+              <a href="#service-cloud">Cloud &amp; DevOps</a>
+              <a href="#service-ai">AI &amp; Copilot in Power Platform</a>
+              <a href="#service-sharepoint">SharePoint Solutions</a>
+            </div>
+          </div>
+          <a href="#about">About Us</a>
           <a href="#work">Case Studies</a>
           <a href="#process">Process</a>
           <a href="#pricing">Engagement</a>
+          <a href="#contact">Contact Us</a>
           <a href="#faq">FAQ</a>
         </nav>
 
@@ -831,11 +1013,23 @@
         </div>
       </div>
       <div class="container" id="mobileNav" hidden>
-        <nav style="display:flex;gap:1rem;padding:0 0 1rem;color:var(--muted);font-size:0.93rem;">
-          <a href="#services">Services</a>
+        <nav class="mobile-nav" aria-label="Mobile navigation">
+          <details class="mobile-submenu">
+            <summary>Services</summary>
+            <div class="mobile-submenu-links">
+              <a href="#service-discovery">Product Discovery</a>
+              <a href="#service-dotnet">.NET App Development</a>
+              <a href="#service-mobile">Mobile App Development</a>
+              <a href="#service-cloud">Cloud &amp; DevOps</a>
+              <a href="#service-ai">AI &amp; Copilot in Power Platform</a>
+              <a href="#service-sharepoint">SharePoint Solutions</a>
+            </div>
+          </details>
+          <a href="#about">About Us</a>
           <a href="#work">Case Studies</a>
           <a href="#process">Process</a>
           <a href="#pricing">Engagement</a>
+          <a href="#contact">Contact Us</a>
           <a href="#faq">FAQ</a>
         </nav>
       </div>
@@ -908,6 +1102,45 @@
         </div>
       </section>
 
+      <section class="section" id="about" style="padding-bottom:2.8rem;">
+        <div class="container">
+          <h2>About VirtualSoft</h2>
+          <p class="intro">
+            We are a delivery-focused software studio helping organizations modernize systems, launch better products,
+            and build long-term engineering capability.
+          </p>
+
+          <div class="about-wrap">
+            <article class="about-story">
+              <h3>What we believe</h3>
+              <p>
+                Great software is not just code. It is clear business intent, user empathy, and disciplined execution.
+                Our teams work closely with stakeholders to make confident product decisions and ship measurable outcomes.
+              </p>
+              <p>
+                From strategy workshops to production support, we stay accountable for quality, speed, and transparency at every phase.
+              </p>
+
+              <div class="about-highlights" aria-label="Company highlights">
+                <div class="about-chip"><strong>2018</strong><span>Founded in Ontario</span></div>
+                <div class="about-chip"><strong>120+</strong><span>Digital products delivered</span></div>
+                <div class="about-chip"><strong>42</strong><span>Product, design, and engineering specialists</span></div>
+              </div>
+            </article>
+
+            <aside class="about-values" aria-label="Core values">
+              <h3>How we work</h3>
+              <ul class="value-list">
+                <li>Business-first engineering with practical decisions</li>
+                <li>Weekly visibility through demos and clear reporting</li>
+                <li>Secure-by-design architecture for regulated industries</li>
+                <li>Partnership mindset focused on long-term outcomes</li>
+              </ul>
+            </aside>
+          </div>
+        </div>
+      </section>
+
       <section class="section" id="services">
         <div class="container">
           <h2>End-to-end software development services</h2>
@@ -916,32 +1149,32 @@
           </p>
 
           <div class="services">
-            <article class="card">
+            <article class="card" id="service-discovery">
               <div class="icon a" aria-hidden="true">P</div>
               <h3>Product Discovery</h3>
               <p>Clarify goals, user journeys, architecture, and roadmap priorities before engineering starts.</p>
             </article>
-            <article class="card">
+            <article class="card" id="service-dotnet">
               <div class="icon b" aria-hidden="true">W</div>
               <h3>.NET App Development</h3>
               <p>Build secure, scalable .NET applications and APIs with modern architecture, clean code, and reliable performance.</p>
             </article>
-            <article class="card">
+            <article class="card" id="service-mobile">
               <div class="icon c" aria-hidden="true">M</div>
               <h3>Mobile App Development</h3>
               <p>Deliver native and cross-platform apps with smooth UX and measurable business outcomes.</p>
             </article>
-            <article class="card">
+            <article class="card" id="service-cloud">
               <div class="icon b" aria-hidden="true">C</div>
               <h3>Cloud & DevOps</h3>
               <p>Modernize infrastructure, automate deployments, and reduce release risk with robust CI/CD.</p>
             </article>
-            <article class="card">
+            <article class="card" id="service-ai">
               <div class="icon c" aria-hidden="true">A</div>
               <h3>AI & Copilot in Power Platform</h3>
               <p>Leverage AI and Copilot to automate workflows and build intelligent Power Apps, Power Automate flows, and copilots.</p>
             </article>
-            <article class="card">
+            <article class="card" id="service-sharepoint">
               <div class="icon a" aria-hidden="true">S</div>
               <h3>SharePoint Solutions</h3>
               <p>Design SharePoint intranets, document workflows, and custom integrations that improve collaboration and governance.</p>
@@ -1102,12 +1335,16 @@
         </div>
       </section>
 
-      <section class="cta">
+      <section class="cta" id="contact">
         <div class="container">
           <div class="cta-panel">
             <div>
-              <h2>Have a product idea or modernization challenge?</h2>
+              <h2>Contact Us</h2>
               <p>Share your goals and get a practical roadmap from strategy through delivery.</p>
+              <p class="cta-address">
+                <strong>Address:</strong> 99 Farthingale Crescent, Brampton, ON L7A 1W8, Canada
+                <a href="https://www.google.com/maps/search/?api=1&query=99+Farthingale+Crescent%2C+Brampton%2C+ON+L7A+1W8%2C+Canada" target="_blank" rel="noopener noreferrer">View on Map</a>
+              </p>
             </div>
             <div style="display:flex;gap:0.7rem;flex-wrap:wrap;">
               <button class="btn btn-primary" type="button">Schedule Strategy Call</button>
